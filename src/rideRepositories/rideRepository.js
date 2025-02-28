@@ -6,10 +6,10 @@ async function List(passenger_user_id, pickup_date, ride_id, driver_user_id, sta
     let filtro = []
     let sql = `select r.*, u.name as passenger_name, u.phone as passenger_phone,
     d.name as driver_name, d.phone as driver_phone
-from rides r
-join users u on (u.user_id = r.passenger_user_id)
-left join users d on (d.user_id = r.driver_user_id)
-where r.ride_id > 0 `
+    from rides r
+    join users u on (u.user_id = r.passenger_user_id)
+    left join users d on (d.user_id = r.driver_user_id)
+    where r.ride_id > 0 `
 
     if (passenger_user_id) {
         sql = sql + " and r.passenger_user_id = ? ";
