@@ -1,8 +1,8 @@
 import rideService from "../services/rideService.js";
 
-async function List(req, res){
+async function List(req, res) {
 
-    try{
+    try {
 
         const passenger_user_id = req.query.passenger_user_id;
         const pickup_date = req.query.pickup_date;
@@ -11,14 +11,14 @@ async function List(req, res){
         const status = req.status
         const rides = await rideService.List(passenger_user_id, pickup_date, ride_id, driver_user_id, status);
         res.status(200).json(rides);
-    } catch(error){
+    } catch (error) {
         res.status(500).json(error);
     }
 
- 
+
 }
 
-async function Insert (req, res){
+async function Insert(req, res) {
 
     try {
         const passenger_user_id = req.body.passenger_user_id;
