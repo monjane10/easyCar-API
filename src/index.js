@@ -11,6 +11,7 @@ app.use(cors());
 
 //ROUTES
 app.get('/rides',controllerRide.List);
+app.post('/rides',controllerRide.Insert);
 
 
 app.listen(3000, () => {

@@ -13,7 +13,7 @@ function execute(command, params, method = "all") {
     });
 }
 
-const db = new SQLite.Database("./src/database/banco.db", SQLite.OPEN_READWRITE, (error) =>{
+const db = new SQLite.Database("./src/database/base.db", SQLite.OPEN_READWRITE, (error) =>{
     if (error)
         return console.log("Erro ao conectar a base de dados:" + error.message)
     else
