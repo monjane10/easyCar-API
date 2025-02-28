@@ -1,14 +1,7 @@
-
+import rideRepository from "../rideRepositories/rideRepository.js";
 
 function List(){
-    const rides = [{
-        ride_id: 1
-    },
-
-    {
-        ride_id: 2
-    }
-];
+    const rides = rideRepository.List();
 return rides;
 }
 
