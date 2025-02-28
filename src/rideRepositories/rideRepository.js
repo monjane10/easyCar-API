@@ -40,4 +40,18 @@ where r.ride_id > 0 `
     return rides;
 }
 
-export default { List };
+async function Insert(passenger_user_id, pickup_address,
+    pickup_latitude, pickup_longitude, dropoff_address) {
+
+    let sql = `insert into rides(passenger_user_id, pickup_address,
+        pickup_latitude, pickup_longitude, dropoff_address, pickup_date, status)
+        values(?, ?, ?, ?, ?, CURRENT_DATE, 'P') returning ride_id`;
+
+    const ride = await execute(sql, [passenger_user_id, pickup_address,
+        pickup_latitude, pickup_longitude, dropoff_address]);
+
+    return ride[0];
+}
+
+
+export default { List, Insert };
