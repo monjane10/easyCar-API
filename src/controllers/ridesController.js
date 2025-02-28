@@ -1,7 +1,15 @@
-
+import rideService from "../services/rideService";
 
 function List(req, res){
-    res.status(200).json({message: "Deu tudo certo de novo"});
+
+    try{
+        const rides = rideService.List();
+        res.status(200).json(rides);
+    } catch(error){
+        res.status(500).json(error);
+    }
+
+ 
 }
 
 
