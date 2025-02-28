@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import controllerRide from "./controllers/ridesController.js";
 
 const app = express();
 
@@ -9,9 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 //ROUTES
-app.get('/rides', (req, res) => {
-    res.status(200).json({message: "Deu tudo certo"});
-});
+app.get('/rides',controllerRide.List);
 
 
 app.listen(3000, () => {
