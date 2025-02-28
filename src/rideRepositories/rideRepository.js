@@ -54,4 +54,62 @@ async function Insert(passenger_user_id, pickup_address,
 }
 
 
-export default { List, Insert };
+async function Delete(ride_id) {
+
+    let sql = `delete from rides where ride_id = ?`;
+
+    await execute(sql, [ride_id]);
+
+    return { ride_id }
+}
+
+async function Finish(ride_id, passenger_user_id) {
+
+    let sql = `update rides set status = 'F' where ride_id = ? and passenger_user_id = ?`;
+
+    await execute(sql, [ride_id, passenger_user_id]);
+
+    return { ride_id }
+}
+
+async function ListForDriver(driver_user_id) {
+
+    let sql = `select r.*, u.name as passenger_name, u.phone as passenger_phone                
+    from rides r
+    join users u on (u.user_id = r.passenger_user_id)
+    where r.pickup_date = CURRENT_DATE
+    and  r.driver_user_id = ? 
+    
+    UNION
+    
+    select r.*, u.name as passenger_name, u.phone as passenger_phone                
+    from rides r
+    join users u on (u.user_id = r.passenger_user_id)
+    where r.pickup_date = CURRENT_DATE
+    and  r.driver_user_id is null 
+    `
+
+
+    const rides = await execute(sql, [driver_user_id]);
+    return rides;
+}
+
+async function Accept(ride_id, driver_user_id) {
+
+    let sql = `update rides set status = 'A', driver_user_id = ? where ride_id = ?`;
+
+    await execute(sql, [driver_user_id, ride_id]);
+
+    return { ride_id }
+}
+
+async function Cancel(ride_id) {
+
+    let sql = `update rides set status = 'P', driver_user_id = null where ride_id = ?`;
+
+    await execute(sql, [ride_id]);
+
+    return { ride_id }
+}
+
+export default { List, Insert, Delete, Finish, ListForDriver, Accept, Cancel };
