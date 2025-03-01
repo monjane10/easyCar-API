@@ -9,7 +9,8 @@ async function List(req, res) {
         const ride_id = req.ride_id
         const driver_user_id = req.driver_user_id
         const status = req.status
-        const rides = await rideService.List(passenger_user_id, pickup_date, ride_id, driver_user_id, status);
+        const status_not = req.status_not
+        const rides = await rideService.List(passenger_user_id, pickup_date, ride_id, driver_user_id, status, status_not);
         res.status(200).json(rides);
     } catch (error) {
         res.status(500).json(error);
