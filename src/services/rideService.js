@@ -52,7 +52,7 @@ async function Accept(ride_id, driver_user_id) {
         timeZone: "Africa/Maputo"}).substring(0, 10);
       const searchRides =  await List(null, dt, null, driver_user_id, "A", null);
       if (searchRides.length > 0) {
-        throw "Você tem uma corrida não finalizada para o dia de hoje:" + searchRides[0].pickup_address;
+        throw "Você tem uma corrida não finalizada para:" + searchRides[0].dropoff_address;
     }
       //---------------------------------------------
     const ride = await rideRepository.Accept(ride_id, driver_user_id);
